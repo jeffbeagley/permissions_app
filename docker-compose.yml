@@ -1,6 +1,10 @@
 version: '2.0'
 
 services:
+    cache:
+        image: redis:4.0.11-alpine
+        command: ["redis-server"]
+
     db:
         image: mcr.microsoft.com/mssql/server:vNext-CTP2.0-ubuntu
         ports:
@@ -25,9 +29,13 @@ services:
         command: "npm run start"
         links: 
           - db:db
+          - cache:cache
+
         depends_on:
           - db
+          - cache
   
 volumes:
     db:
         driver: local
+
