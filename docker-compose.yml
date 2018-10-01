@@ -4,6 +4,8 @@ services:
     cache:
         image: redis:4.0.11-alpine
         command: ["redis-server"]
+        ports:
+          - 6379:6379
 
     db:
         image: mcr.microsoft.com/mssql/server:vNext-CTP2.0-ubuntu
